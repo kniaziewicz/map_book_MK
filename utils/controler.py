@@ -34,9 +34,9 @@ def get_coordinates(city_name:str)->list:
     print(lattitude)
     return [lattitude,longitude]
 
-import folium
-def get_map(users_data:list)->None:
 
+def get_map(users_data:list)->None:
+    import folium
     m = folium.Map(location=(52.23, 21.0),zoom_start=6)
 
     for user in users_data:
