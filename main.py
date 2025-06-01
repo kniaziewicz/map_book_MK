@@ -4,7 +4,7 @@ import tkintermapview
 
 
 
-users:list = []
+users:list=[]
 
 class User:
     def __init__(self,name, surname, location, post):
@@ -15,17 +15,17 @@ class User:
         self.coordinates = self.get_coordinates()
         self.marker = map_widget.set_marker(self.coordinates[0],self.coordinates[1])
 
-def get_coordinates(self)->list:
-    import requests
-    from bs4 import BeautifulSoup
-    url=f"https://pl.wikipedia.org/wiki/{self.location}"
-    response = requests.get(url).text
-    response_html = BeautifulSoup(response, "html.parser")
-    longitude = float(response_html.select(".longitude")[1].text.replace(",","."))
-    lattitude = float(response_html.select(".latitude")[1].text.replace(",","."))
-    print(longitude)
-    print(lattitude)
-    return [lattitude,longitude]
+    def get_coordinates(self)->list:
+        import requests
+        from bs4 import BeautifulSoup
+        url=f"https://pl.wikipedia.org/wiki/{self.location}"
+        response = requests.get(url).text
+        response_html = BeautifulSoup(response, "html.parser")
+        longitude = float(response_html.select(".longitude")[1].text.replace(",","."))
+        latitude = float(response_html.select(".latitude")[1].text.replace(",","."))
+        print(longitude)
+        print(latitude)
+        return [latitude,longitude]
 
 def add_user ():
     zmienna_imie=entry_name.get()
@@ -64,12 +64,12 @@ def edit_user ():
     name=users[i].name
     surname=users[i].surname
     location=users[i].location
-    posts=users[i].posts
+    post=users[i].post
 
     entry_name.insert(0,name)
     entry_surname.insert(0,surname)
     entry_location.insert(0,location)
-    entry_posts.insert(0,posts)
+    entry_posts.insert(0,post)
 
     button_dodaj_obiekt.config(text='zapisz', command=lambda: update_user(i))
 
@@ -78,12 +78,12 @@ def update_user (i):
     new_name=entry_name.get()
     new_surname=entry_surname.get()
     new_location=entry_location.get()
-    new_posts=entry_posts.get()
+    new_post=entry_posts.get()
 
     users[i].name=new_name
     users[i].surname=new_surname
     users[i].location=new_location
-    users[i].posts=new_posts
+    users[i].posts=new_post
 
     users[i].marker.delete()
     users[i].coordinates=users[i].get_coordinates()
