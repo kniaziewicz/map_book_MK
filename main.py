@@ -103,7 +103,7 @@ def show_user_details():
     name=users[i].name
     surname=users[i].surname
     location=users[i].location
-    posts=users[i].posts
+    posts=users[i].post
 
     label_szczegoly_wartosc_name.config(text=name)
     label_szczegoly_wartosc_surname.config(text=surname)
